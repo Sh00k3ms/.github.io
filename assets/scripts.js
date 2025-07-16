@@ -35,8 +35,7 @@ if (puzzle2Form) {
     event.preventDefault();
 
     const userAnswer = puzzle2Input.value.trim().toLowerCase();
-    console.log("Puzzle 2 submitted: ", userAnswer); // Moved here
-
+    console.log("Puzzle 2 submitted: ", userAnswer); 
     const correctAnswer = "stack overflow is the key";
 
     if (userAnswer === correctAnswer) {
@@ -68,13 +67,37 @@ if (puzzle3Form) {
     if (userAnswer === correctAnswer) {
       puzzle3Feedback.textContent = "✅ Correct! You may continue...";
       puzzle3Feedback.style.color = "green";
-      // Optional: redirect to phase4.html
-      // setTimeout(() => { window.location.href = "phase4.html"; }, 2000);
+      setTimeout(() => { window.location.href = "phase4.html"; }, 2000);
     } else {
       puzzle3Feedback.textContent = "❌ Incorrect. Try again.";
       puzzle3Feedback.style.color = "red";
     }
   });
 }  
+
+// Puzzle 4 Logic
+const puzzle4Form = document.getElementById("puzzle4-form");
+if (puzzle4Form) {
+  const puzzle4Input = document.getElementById("puzzle4-answer");
+  const puzzle4Feedback = document.getElementById("puzzle4-feedback");
+
+  puzzle4Form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const userAnswer = puzzle4Input.value.trim().toLowerCase();
+    const correctAnswer = "where's the goon grifter???";
+
+    if (userAnswer === correctAnswer) {
+      puzzle4Feedback.textContent = "🎯 Nailed it! You found Grifter!";
+      puzzle4Feedback.style.color = "green";
+      setTimeout(() => {
+        window.location.href = "claim.html"; // or wherever you want to route them
+      }, 2000);
+    } else {
+      puzzle4Feedback.textContent = "❌ Not quite. Try again.";
+      puzzle4Feedback.style.color = "red";
+    }
+  });
+}
 
 });

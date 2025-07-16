@@ -40,8 +40,9 @@ if (puzzle2Form) {
     if (userAnswer === correctAnswer) {
       puzzle2Feedback.textContent = "✅ Correct! Let's Go!";
       puzzle2Feedback.style.color = "green";
-      // You can optionally add:
-      // setTimeout(() => { window.location.href = 'phase3.html'; }, 2000);
+      setTimeout(() => {
+        window.location.href = "phase3.html";
+      }, 2000);
     } else {
       puzzle2Feedback.textContent = "❌ Incorrect. Try again.";
       puzzle2Feedback.style.color = "red";

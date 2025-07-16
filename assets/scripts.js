@@ -33,6 +33,7 @@ if (puzzle2Form) {
 
   puzzle2Form.addEventListener("submit", (event) => {
     event.preventDefault();
+    console.log("Puzzle 2 submitted: ", userAnswer);
 
     const userAnswer = puzzle2Input.value.trim().toLowerCase();
     const correctAnswer = "stack overflow is the key";

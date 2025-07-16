@@ -38,7 +38,7 @@ if (puzzle2Form) {
     const correctAnswer = "stack overflow is the key";
 
     if (userAnswer === correctAnswer) {
-      puzzle2Feedback.textContent = "✅ Correct! Onward!";
+      puzzle2Feedback.textContent = "✅ Correct! Let's Go!";
       puzzle2Feedback.style.color = "green";
       // You can optionally add:
       // setTimeout(() => { window.location.href = 'phase3.html'; }, 2000);

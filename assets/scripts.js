@@ -11,12 +11,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const userAnswer = puzzle1Input.value.trim().toLowerCase();
     const correctAnswer = "this is the gateway to the next phase";
 
-   if (answer === 'this is the gateway to the next phase') {
-     feedback.textContent = 'Correct! Redirecting to Phase 2...';
-     setTimeout(() => {
-     window.location.href = 'phase2.html';
-   }, 2000);
-}
+
+    if (userAnswer === correctAnswer) {
+      puzzle1Feedback.textContent = "✅ Correct! Redirecting to Phase 2...";
+      puzzle1Feedback.style.color = "green";
+
+      setTimeout(() => {
+        window.location.href = "phase2.html";
+      }, 2000);
+    } else {
+      puzzle1Feedback.textContent = "❌ Incorrect. Try again.";
+      puzzle1Feedback.style.color = "red";
+    }
+  });
+});
 
       puzzle1Feedback.style.color = "green";
       // Optionally redirect:

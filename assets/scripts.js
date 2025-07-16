@@ -25,32 +25,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-// Puzzle 2 Logic
-const puzzle2Form = document.getElementById("puzzle2-form");
-if (puzzle2Form) {
-  const puzzle2Input = document.getElementById("puzzle2-answer");
-  const puzzle2Feedback = document.getElementById("puzzle2-feedback");
+// Puzzle 3 Logic
+const puzzle3Form = document.getElementById("puzzle3-form");
+if (puzzle3Form) {
+  const puzzle3Input = document.getElementById("puzzle3-answer");
+  const puzzle3Feedback = document.getElementById("puzzle3-feedback");
 
-  puzzle2Form.addEventListener("submit", (event) => {
+  puzzle3Form.addEventListener("submit", (event) => {
     event.preventDefault();
 
-    const userAnswer = puzzle2Input.value.trim().toLowerCase();
-    console.log("Puzzle 2 submitted: ", userAnswer); 
-    const correctAnswer = "stack overflow is the key";
+    const userAnswer = puzzle3Input.value.trim().toLowerCase();
+    const correctAnswer = "glider";
 
     if (userAnswer === correctAnswer) {
-      puzzle2Feedback.textContent = "✅ Correct! Let's Go!";
-      puzzle2Feedback.style.color = "green";
+      puzzle3Feedback.textContent = "✅ Correct! Onward to the final phase...";
+      puzzle3Feedback.style.color = "green";
       setTimeout(() => {
-        window.location.href = "phase3.html";
+        window.location.href = "phase4.html";
       }, 2000);
     } else {
-      puzzle2Feedback.textContent = "❌ Incorrect. Try again.";
-      puzzle2Feedback.style.color = "red";
+      puzzle3Feedback.textContent = "❌ Incorrect. Try again.";
+      puzzle3Feedback.style.color = "red";
     }
   });
 }
-
 
 // Puzzle 3 Logic
 const puzzle3Form = document.getElementById("puzzle3-form");

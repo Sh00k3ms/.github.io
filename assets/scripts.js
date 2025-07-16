@@ -33,9 +33,10 @@ if (puzzle2Form) {
 
   puzzle2Form.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log("Puzzle 2 submitted: ", userAnswer);
 
     const userAnswer = puzzle2Input.value.trim().toLowerCase();
+    console.log("Puzzle 2 submitted: ", userAnswer); // Moved here
+
     const correctAnswer = "stack overflow is the key";
 
     if (userAnswer === correctAnswer) {
@@ -50,6 +51,7 @@ if (puzzle2Form) {
     }
   });
 }
+
 
 // Puzzle 3 Logic
 const puzzle3Form = document.getElementById("puzzle3-form");

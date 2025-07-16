@@ -11,8 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const userAnswer = puzzle1Input.value.trim().toLowerCase();
     const correctAnswer = "this is the gateway to the next phase";
 
-    if (userAnswer === correctAnswer) {
-      puzzle1Feedback.textContent = "✅ Correct! Proceed to Phase 2.";
+   if (answer === 'this is the gateway to the next phase') {
+     feedback.textContent = 'Correct! Redirecting to Phase 2...';
+     setTimeout(() => {
+     window.location.href = 'phase2.html';
+   }, 2000);
+}
+
       puzzle1Feedback.style.color = "green";
       // Optionally redirect:
       // window.location.href = "phase2.html";

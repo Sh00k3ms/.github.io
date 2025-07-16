@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
 
       const userAnswer = puzzle2Input.value.trim().toLowerCase();
-      const correctAnswer = "correct answer for puzzle 2"; // <-- Update this line with your actual answer
+      const correctAnswer = "stack overflow is the key"; // <-- Update this line with your actual answer
 
       if (userAnswer === correctAnswer) {
         puzzle2Feedback.textContent = "✅ Correct! Onward!";

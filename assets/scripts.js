@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Puzzle 1 Logic
+  // Puzzle 1: Caesar Cipher
   const puzzle1Form = document.getElementById("puzzle1-form");
   if (puzzle1Form) {
     const puzzle1Input = document.getElementById("puzzle1-answer");
@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (userAnswer === correctAnswer) {
         puzzle1Feedback.textContent = "✅ Correct! Redirecting to Phase 2...";
         puzzle1Feedback.style.color = "green";
-        setTimeout(() => window.location.href = "phase2.html", 2000);
+        setTimeout(() => {
+          window.location.href = "phase2.html";
+        }, 2000);
       } else {
         puzzle1Feedback.textContent = "❌ Incorrect. Try again.";
         puzzle1Feedback.style.color = "red";
@@ -21,29 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Puzzle 2 Logic
-  const puzzle2Form = document.getElementById("puzzle2-form");
-  if (puzzle2Form) {
-    const puzzle2Input = document.getElementById("puzzle2-answer");
-    const puzzle2Feedback = document.getElementById("puzzle2-feedback");
-
-    puzzle2Form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const userAnswer = puzzle2Input.value.trim().toLowerCase();
-      const correctAnswer = "stack overflow is the key";
-
-      if (userAnswer === correctAnswer) {
-        puzzle2Feedback.textContent = "✅ Correct! Moving to Phase 3...";
-        puzzle2Feedback.style.color = "green";
-        setTimeout(() => window.location.href = "phase3.html", 2000);
-      } else {
-        puzzle2Feedback.textContent = "❌ Incorrect. Try again.";
-        puzzle2Feedback.style.color = "red";
-      }
-    });
-  }
-
-  // Puzzle 3 Logic
+  // Puzzle 3: Glider Symbol
   const puzzle3Form = document.getElementById("puzzle3-form");
   if (puzzle3Form) {
     const puzzle3Input = document.getElementById("puzzle3-answer");
@@ -55,9 +35,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const correctAnswer = "glider";
 
       if (userAnswer === correctAnswer) {
-        puzzle3Feedback.textContent = "✅ Correct! Onward to the final phase...";
+        puzzle3Feedback.textContent = "✅ Correct! Onward to Phase 4...";
         puzzle3Feedback.style.color = "green";
-        setTimeout(() => window.location.href = "phase4.html", 2000);
+        setTimeout(() => {
+          window.location.href = "phase4.html";
+        }, 2000);
       } else {
         puzzle3Feedback.textContent = "❌ Incorrect. Try again.";
         puzzle3Feedback.style.color = "red";
@@ -65,8 +47,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Puzzle 4 Logic
-  const puzzle4Form = document.getElementById("puzzle4-form");
+  // Puzzle 4: Tabnabbing Awareness
+  const tabnabbingForm = document.getElementById("tabnabbingForm");
+  if (tabnabbingForm) {
+    const tabInput = document.getElementById("tabInput");
+    const tabFeedback = document.getElementById("tabFeedback");
+
+    tabnabbingForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const answer = tabInput.value.toLowerCase().trim();
+
+      if (
+        answer.includes("tabnabbing") &&
+        (answer.includes("phishing") || answer.includes("credential"))
+      ) {
+        tabFeedback.textContent = "✅ Nicely done. Let’s see if you can find Grifter...";
+        tabFeedback.style.color = "green";
+        setTimeout(() => {
+          window.location.href = "phase5.html";
+        }, 2000);
+      } else {
+        tabFeedback.textContent = "❌ Not quite. Try explaining what tabnabbing is.";
+        tabFeedback.style.color = "red";
+      }
+    });
+  }
+
+  // Puzzle 5: Final Code Phrase from Grifter
+  const puzzle4Form = document.getElementById("puzzle4-form"); // reuse existing ID
   if (puzzle4Form) {
     const puzzle4Input = document.getElementById("puzzle4-answer");
     const puzzle4Feedback = document.getElementById("puzzle4-feedback");
@@ -74,51 +82,19 @@ document.addEventListener("DOMContentLoaded", () => {
     puzzle4Form.addEventListener("submit", (event) => {
       event.preventDefault();
       const userAnswer = puzzle4Input.value.trim().toLowerCase();
-      const correctAnswer = "where's the goon grifter???";
+      const correctAnswer = "hack the planet";
 
       if (userAnswer === correctAnswer) {
         puzzle4Feedback.textContent = "🎯 Nailed it! You found Grifter!";
         puzzle4Feedback.style.color = "green";
-        setTimeout(() => window.location.href = "claim.html", 2000);
+        setTimeout(() => {
+          window.location.href = "claim.html";
+        }, 2000);
       } else {
         puzzle4Feedback.textContent = "❌ Not quite. Try again.";
         puzzle4Feedback.style.color = "red";
       }
     });
   }
-
-  // Claim Page Logic (Fork to winner/solved)
-  const claimForm = document.getElementById("claim-form");
-  if (claimForm) {
-    claimForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-
-      const handle = document.getElementById("handle").value.trim();
-      const feedback = document.getElementById("claim-feedback");
-
-      try {
-        // Step 1: Check existing solver count
-        const checkRes = await fetch("YOUR_GET_WEB_APP_URL_HERE");
-        const data = await checkRes.json();
-        const isFirst = data.count === 0;
-
-        // Step 2: Submit handle
-        await fetch("YOUR_FORM_SUBMIT_URL_HERE", {
-          method: "POST",
-          mode: "no-cors",
-          body: new FormData(claimForm),
-        });
-
-        // Step 3: Redirect based on order
-        if (isFirst) {
-          window.location.href = "winner.html";
-        } else {
-          window.location.href = "solved.html";
-        }
-      } catch (error) {
-        feedback.textContent = "⚠️ Error submitting. Try again.";
-        feedback.style.color = "red";
-      }
-    });
-  }
 });
+

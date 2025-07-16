@@ -1,1 +1,59 @@
-<!-- Placeholder content for claim.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claim Your Prize</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <main>
+    <h1>Contest Goon</h1>
+    <p>
+      You did it. You hacked the stack, you found Grifter, and you scanned the QR. Only a few elite solvers make it here.
+    </p>
+
+    <form id="claim-form">
+      <label for="solver-name">Your Handle:</label>
+      <input type="text" id="solver-name" name="solver-name" placeholder="h4ck3rm0nkey" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="claim-feedback"></p>
+    <p class="small">
+      *Only the first 10 solvers will receive the holographic sticker and limited edition temporary tattoo. Submissions will be logged.
+    </p>
+
+    <img src="assets/holographic-sticker-preview.png" alt="Holographic Grifter Reward" class="puzzle-image" />
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const claimForm = document.getElementById("claim-form");
+      const claimFeedback = document.getElementById("claim-feedback");
+
+      claimForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const handle = document.getElementById("solver-name").value.trim();
+
+        if (!handle) return;
+
+        try {
+          await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ handle })
+          });
+
+          claimFeedback.textContent = `Thanks, ${handle}. Respect the pack.`;
+          claimFeedback.style.color = "green";
+          claimForm.reset();
+        } catch (err) {
+          claimFeedback.textContent = "Error submitting. Please try again later.";
+          claimFeedback.style.color = "red";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

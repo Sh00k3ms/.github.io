@@ -50,29 +50,6 @@ if (puzzle3Form) {
   });
 }
 
-// Puzzle 3 Logic
-const puzzle3Form = document.getElementById("puzzle3-form");
-if (puzzle3Form) {
-  const puzzle3Input = document.getElementById("puzzle3-answer");
-  const puzzle3Feedback = document.getElementById("puzzle3-feedback");
-
-  puzzle3Form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const userAnswer = puzzle3Input.value.trim().toLowerCase();
-    const correctAnswer = "echo";
-
-    if (userAnswer === correctAnswer) {
-      puzzle3Feedback.textContent = "✅ Correct! You may continue...";
-      puzzle3Feedback.style.color = "green";
-      setTimeout(() => { window.location.href = "phase4.html"; }, 2000);
-    } else {
-      puzzle3Feedback.textContent = "❌ Incorrect. Try again.";
-      puzzle3Feedback.style.color = "red";
-    }
-  });
-}  
-
 // Puzzle 4 Logic
 const puzzle4Form = document.getElementById("puzzle4-form");
 if (puzzle4Form) {

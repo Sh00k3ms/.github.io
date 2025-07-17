@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
   // Puzzle 5 (Grifter)
   const form5 = document.getElementById("puzzle5-form");
   if (form5) {

@@ -11,15 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    type: "validate",
-    puzzle: puzzleName,
-    answer: userAnswer
-  })
-})
-
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        type: "validate",
+        puzzle: puzzleName,
+        answer: userAnswer
+      })
+    })
       .then(res => res.json())
       .then(data => {
         if (data.status === "correct") {
@@ -67,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Puzzle 4 (tabnabbing)
+  // Puzzle 4
   const form4 = document.getElementById("tabnabbingForm");
   if (form4) {
     form4.addEventListener("submit", e => {
@@ -85,10 +84,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const input = document.getElementById("puzzle5-answer");
       const userAnswer = input?.value?.trim().toLowerCase();
 
-      fetch("https://script.google.com/macros/s/AKfycbxIyyqjgsr_4vV2dKDgJtB37h4m6EHYfYIj1ff6P7QNCVUF5YBZDwKdgKhf5fk01q4gpw/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ puzzle: "phase5", answer: userAnswer })
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          type: "validate",
+          puzzle: "phase5",
+          answer: userAnswer
+        })
       })
         .then(res => res.json())
         .then(data => {

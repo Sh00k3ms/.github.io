@@ -1,142 +1,105 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Helper to decode the answer from <meta>
-  function getDecodedAnswer() {
-    const meta = document.querySelector('meta[data-answer]');
-    return atob(meta?.dataset?.answer || "");
+  function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
+    const input = document.getElementById(inputId);
+    const feedback = document.getElementById(feedbackId);
+    const userAnswer = input?.value?.trim().toLowerCase();
+
+    if (!userAnswer) {
+      feedback.textContent = "Please enter an answer.";
+      feedback.style.color = "orange";
+      return;
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbxIyyqjgsr_4vV2dKDgJtB37h4m6EHYfYIj1ff6P7QNCVUF5YBZDwKdgKhf5fk01q4gpw/exec", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ puzzle: puzzleName, answer: userAnswer })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "correct") {
+          feedback.textContent = "✅ Correct! Redirecting...";
+          feedback.style.color = "lightgreen";
+          if (nextUrl) {
+            setTimeout(() => window.location.href = nextUrl, 1500);
+          }
+        } else {
+          feedback.textContent = "❌ Incorrect. Try again.";
+          feedback.style.color = "red";
+        }
+      })
+      .catch(err => {
+        console.error("Validation error:", err);
+        feedback.textContent = "Error. Please try again later.";
+        feedback.style.color = "red";
+      });
   }
 
   // Puzzle 1
-  try {
-    const form = document.getElementById("puzzle1-form");
-    const input = document.getElementById("puzzle1-answer");
-    const feedback = document.getElementById("puzzle1-feedback");
-    const correctAnswer = getDecodedAnswer();
-
-    if (form && input && feedback) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "✅ Correct! Redirecting to Phase 2...";
-          feedback.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "phase2.html";
-          }, 2000);
-        } else {
-          feedback.textContent = "❌ Incorrect. Try again.";
-          feedback.style.color = "red";
-        }
-      });
-    }
-  } catch (err) {
-    console.error("Puzzle 1 Error:", err);
+  const form1 = document.getElementById("puzzle1-form");
+  if (form1) {
+    form1.addEventListener("submit", e => {
+      e.preventDefault();
+      validateAnswer("phase1", "puzzle1-answer", "puzzle1-feedback", "phase2.html");
+    });
   }
 
   // Puzzle 2
-  try {
-    const form = document.getElementById("puzzle2-form");
-    const input = document.getElementById("puzzle2-answer");
-    const feedback = document.getElementById("puzzle2-feedback");
-    const correctAnswer = getDecodedAnswer();
-
-    if (form && input && feedback) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "✅ You saw through the source. Forward to Phase 3...";
-          feedback.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "phase3.html";
-          }, 2000);
-        } else {
-          feedback.textContent = "❌ Incorrect. Check the source closely.";
-          feedback.style.color = "red";
-        }
-      });
-    }
-  } catch (err) {
-    console.error("Puzzle 2 Error:", err);
+  const form2 = document.getElementById("puzzle2-form");
+  if (form2) {
+    form2.addEventListener("submit", e => {
+      e.preventDefault();
+      validateAnswer("phase2", "puzzle2-answer", "puzzle2-feedback", "phase3.html");
+    });
   }
 
   // Puzzle 3
-  try {
-    const form = document.getElementById("puzzle3-form");
-    const input = document.getElementById("puzzle3-answer");
-    const feedback = document.getElementById("puzzle3-feedback");
-    const correctAnswer = getDecodedAnswer();
-
-    if (form && input && feedback) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "✅ Correct! Onward to Phase 4...";
-          feedback.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "phase4.html";
-          }, 2000);
-        } else {
-          feedback.textContent = "❌ Incorrect. Try again.";
-          feedback.style.color = "red";
-        }
-      });
-    }
-  } catch (err) {
-    console.error("Puzzle 3 Error:", err);
+  const form3 = document.getElementById("puzzle3-form");
+  if (form3) {
+    form3.addEventListener("submit", e => {
+      e.preventDefault();
+      validateAnswer("phase3", "puzzle3-answer", "puzzle3-feedback", "phase4.html");
+    });
   }
 
-  // Puzzle 4
-  try {
-    const form = document.getElementById("tabnabbingForm");
-    const input = document.getElementById("tabInput");
-    const feedback = document.getElementById("tabFeedback");
-    const correctAnswer = getDecodedAnswer();
-
-    if (form && input && feedback) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "✅ Nicely done. Let’s see if you can find Grifter...";
-          feedback.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "phase5.html";
-          }, 2000);
-        } else {
-          feedback.textContent = "❌ Not quite. Try again.";
-          feedback.style.color = "red";
-        }
-      });
-    }
-  } catch (err) {
-    console.error("Puzzle 4 Error:", err);
+  // Puzzle 4 (tabnabbing)
+  const form4 = document.getElementById("tabnabbingForm");
+  if (form4) {
+    form4.addEventListener("submit", e => {
+      e.preventDefault();
+      validateAnswer("phase4", "tabInput", "tabFeedback", "phase5.html");
+    });
   }
 
-  // Puzzle 5
-  try {
-    const form = document.getElementById("puzzle5-form");
-    const input = document.getElementById("puzzle5-answer");
-    const feedback = document.getElementById("puzzle5-feedback");
-    const correctAnswer = getDecodedAnswer();
+  // Puzzle 5 (Grifter)
+  const form5 = document.getElementById("puzzle5-form");
+  if (form5) {
+    form5.addEventListener("submit", e => {
+      e.preventDefault();
+      const feedback = document.getElementById("puzzle5-feedback");
+      const input = document.getElementById("puzzle5-answer");
+      const userAnswer = input?.value?.trim().toLowerCase();
 
-    if (form && input && feedback) {
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const userAnswer = input.value.trim().toLowerCase();
-        if (userAnswer === correctAnswer) {
-          feedback.textContent = "🎯 Nailed it! You found Grifter!";
-          feedback.style.color = "green";
-          setTimeout(() => {
-            window.location.href = "claim.html";
-          }, 2000);
-        } else {
-          feedback.textContent = "❌ Not quite. Try again.";
+      fetch("https://script.google.com/macros/s/AKfycbxIyyqjgsr_4vV2dKDgJtB37h4m6EHYfYIj1ff6P7QNCVUF5YBZDwKdgKhf5fk01q4gpw/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ puzzle: "phase5", answer: userAnswer })
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status === "correct") {
+            feedback.textContent = "✅ Correct! You found the elusive Grifter in the wild. Ask him if he has a QR code for you to scan.";
+            feedback.style.color = "lightgreen";
+          } else {
+            feedback.textContent = "❌ Incorrect. Try again.";
+            feedback.style.color = "red";
+          }
+        })
+        .catch(err => {
+          console.error("Validation error:", err);
+          feedback.textContent = "Error. Please try again later.";
           feedback.style.color = "red";
-        }
-      });
-    }
-  } catch (err) {
-    console.error("Puzzle 5 Error:", err);
+        });
+    });
   }
 });

@@ -1,30 +1,22 @@
-<h2>Phase 4: Eyes Wide Open</h2>
-<p>One of your open tabs just changed. 👀 Did you notice?</p>
-<p>To pass this challenge, answer the following:</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phase 4 - Browser Check</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Phase 4: Recognizing Browser Attacks</h1>
+    <img src="assets/question4.png" alt="Example" class="puzzle-image"/>
+    <p><strong>Question:</strong> You switch tabs, return to the page, and suddenly the login form has changed — but the URL still looks familiar. What kind of attack might this be?</p>
 
-**“What is tabnabbing?”**
-
-<form id="tabnabbingForm">
-  <img src="assets/tabnabbing.jpg" alt="Tabnabbing Example" style="max-width: 100%; border: 2px solid #444; border-radius: 8px; margin-top: 1rem;" />
-  <input type="text" id="tabInput" placeholder="Enter your answer" required>
-  <button type="submit">Submit</button>
-</form>
-
-<p id="tabFeedback"></p>
-
-<script>
-  document.getElementById("tabnabbingForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const input = document.getElementById("tabInput").value.toLowerCase().trim();
-    const feedback = document.getElementById("tabFeedback");
-
-    if (input.includes("tabnabbing") && (input.includes("phishing") || input.includes("credential"))) {
-      feedback.textContent = "✅ Nicely done. Let’s see if you can find Grifter...";
-      setTimeout(() => {
-        window.location.href = "/phase5.html";  // replace with your actual next step
-      }, 2000);
-    } else {
-      feedback.textContent = "❌ Not quite. Try explaining what tabnabbing is.";
-    }
-  });
-</script>
+    <form id="tabnabbingForm">
+      <input type="text" id="tabInput" placeholder="Explain the attack..." required />
+      <button type="submit">Submit</button>
+    </form>
+    <p id="tabFeedback"></p>
+  </div>
+</body>
+</html>

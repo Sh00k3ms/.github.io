@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   // Puzzle 1: Caesar Cipher
   const puzzle1Form = document.getElementById("puzzle1-form");
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Puzzle 4: Tabnabbing Awareness
+  // Puzzle 4: Tabnabbing Awareness (reworded)
   const tabnabbingForm = document.getElementById("tabnabbingForm");
   if (tabnabbingForm) {
     const tabInput = document.getElementById("tabInput");
@@ -67,14 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "phase5.html";
         }, 2000);
       } else {
-        tabFeedback.textContent = "❌ Not quite. Try explaining what tabnabbing is.";
+        tabFeedback.textContent = "❌ Not quite. Try explaining how attackers use deceptive tabs.";
         tabFeedback.style.color = "red";
       }
     });
   }
 
   // Puzzle 5: Final Code Phrase from Grifter
-  const puzzle4Form = document.getElementById("puzzle4-form"); // reuse existing ID
+  const puzzle4Form = document.getElementById("puzzle4-form");
   if (puzzle4Form) {
     const puzzle4Input = document.getElementById("puzzle4-answer");
     const puzzle4Feedback = document.getElementById("puzzle4-feedback");
@@ -97,4 +98,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-

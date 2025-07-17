@@ -11,10 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ puzzle: puzzleName, answer: userAnswer })
-    })
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    type: "validate",
+    puzzle: puzzleName,
+    answer: userAnswer
+  })
+})
+
       .then(res => res.json())
       .then(data => {
         if (data.status === "correct") {

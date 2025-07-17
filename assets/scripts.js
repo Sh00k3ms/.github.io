@@ -10,15 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
+    fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        type: "validate",
         puzzle: puzzleName,
         answer: userAnswer
-      })
     })
+  })
+  
       .then(res => res.json())
       .then(data => {
         if (data.status === "correct") {

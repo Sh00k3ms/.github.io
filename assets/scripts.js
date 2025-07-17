@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    fetch("https://script.google.com/macros/s/AKfycbxIyyqjgsr_4vV2dKDgJtB37h4m6EHYfYIj1ff6P7QNCVUF5YBZDwKdgKhf5fk01q4gpw/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ puzzle: puzzleName, answer: userAnswer })

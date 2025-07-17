@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
- // Puzzle 2: Source Clue (answer hidden in HTML)
+ // Puzzle 2: Source Clue 
 const puzzle2Form = document.getElementById("puzzle2-form");
 if (puzzle2Form) {
   const puzzle2Input = document.getElementById("puzzle2-answer");
@@ -48,7 +48,7 @@ if (puzzle2Form) {
 }
 
 
-  // Puzzle 3: Glider Symbol
+  // Puzzle 3: Hacker Symbol
   const puzzle3Form = document.getElementById("puzzle3-form");
   if (puzzle3Form) {
     const puzzle3Input = document.getElementById("puzzle3-answer");
@@ -72,13 +72,13 @@ if (puzzle2Form) {
     });
   }
 
-  // Puzzle 4: Tabnabbing Awareness
-  const tabnabbingForm = document.getElementById("tabnabbingForm");
-  if (tabnabbingForm) {
+  // Puzzle 4: Browser Awareness
+  const browserForm = document.getElementById("tabnabbingForm");
+  if (browserForm) {
     const tabInput = document.getElementById("tabInput");
     const tabFeedback = document.getElementById("tabFeedback");
 
-    tabnabbingForm.addEventListener("submit", (event) => {
+    browserForm.addEventListener("submit", (event) => {
       event.preventDefault();
       const answer = tabInput.value.toLowerCase().trim();
 

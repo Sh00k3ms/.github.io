@@ -23,29 +23,30 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Puzzle 2: Source Clue
-  const puzzle2Form = document.getElementById("puzzle2-form");
-  if (puzzle2Form) {
-    const puzzle2Input = document.getElementById("puzzle2-answer");
-    const puzzle2Feedback = document.getElementById("puzzle2-feedback");
+ // Puzzle 2: Source Clue (answer hidden in HTML)
+const puzzle2Form = document.getElementById("puzzle2-form");
+if (puzzle2Form) {
+  const puzzle2Input = document.getElementById("puzzle2-answer");
+  const puzzle2Feedback = document.getElementById("puzzle2-feedback");
+  const hiddenAnswer = document.getElementById("puzzle2-answer-key")?.dataset.answer?.toLowerCase();
 
-    puzzle2Form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const userAnswer = puzzle2Input.value.trim().toLowerCase();
-      const correctAnswer = "viewsource";
+  puzzle2Form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const userAnswer = puzzle2Input.value.trim().toLowerCase();
 
-      if (userAnswer === correctAnswer) {
-        puzzle2Feedback.textContent = "✅ You saw through the source. Forward to Phase 3...";
-        puzzle2Feedback.style.color = "green";
-        setTimeout(() => {
-          window.location.href = "phase3.html";
-        }, 2000);
-      } else {
-        puzzle2Feedback.textContent = "❌ Incorrect. Check the source closely.";
-        puzzle2Feedback.style.color = "red";
-      }
-    });
-  }
+    if (userAnswer === hiddenAnswer) {
+      puzzle2Feedback.textContent = "✅ You saw through the source. Forward to Phase 3...";
+      puzzle2Feedback.style.color = "green";
+      setTimeout(() => {
+        window.location.href = "phase3.html";
+      }, 2000);
+    } else {
+      puzzle2Feedback.textContent = "❌ Incorrect. Check the source closely.";
+      puzzle2Feedback.style.color = "red";
+    }
+  });
+}
+
 
   // Puzzle 3: Glider Symbol
   const puzzle3Form = document.getElementById("puzzle3-form");

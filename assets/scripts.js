@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         puzzle: puzzleName,
-        answer: userAnswer})
+        answer: userAnswer
+    })
   })
   
       .then(res => res.json())

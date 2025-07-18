@@ -1,6 +1,6 @@
 
 document.addEventListener("keydown", (event) => {
-  if (event.ctrlKey && event.shiftKey && event.key === "W") {
+  if (event.ctrlKey && event.shiftKey && event.key === "H") {
     window.location.href = "walkthrough.html";
   }
 });

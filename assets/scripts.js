@@ -79,42 +79,37 @@ if (form4) {
   });
 }
 
+// Puzzle 5 (Grifter)
+const form5 = document.getElementById("puzzle5-form");
+if (form5) {
+  form5.addEventListener("submit", e => {
+    e.preventDefault();
+    const feedback = document.getElementById("puzzle5-feedback");
+    const input = document.getElementById("puzzle5-answer");
+    const userAnswer = input?.value?.trim().toLowerCase();
 
-
-
-  // Puzzle 5 (Grifter)
-  const form5 = document.getElementById("puzzle5-form");
-  if (form5) {
-    form5.addEventListener("submit", e => {
-      e.preventDefault();
-      const feedback = document.getElementById("puzzle5-feedback");
-      const input = document.getElementById("puzzle5-answer");
-      const userAnswer = input?.value?.trim().toLowerCase();
-
-fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
-  method: "POST",
-  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  body: new URLSearchParams({
-    puzzle: "phase5",
-    answer: userAnswer
-  })
-})
-
-        .then(res => res.json())
-        .then(data => {
-          if (data.status === "correct") {
-            feedback.textContent = "✅ Correct! You found the elusive Grifter in the wild. Ask him if he has a QR code for you to scan.";
-            feedback.style.color = "lightgreen";
-          } else {
-            feedback.textContent = "❌ Incorrect. Try again.";
-            feedback.style.color = "red";
-          }
-        })
-        .catch(err => {
-          console.error("Validation error:", err);
-          feedback.textContent = "Error. Please try again later.";
+    fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        puzzle: "phase5",
+        answer: userAnswer
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "correct") {
+          feedback.textContent = "✅ Correct! You found the elusive Grifter in the wild. Ask him if he has a QR code for you to scan.";
+          feedback.style.color = "lightgreen";
+        } else {
+          feedback.textContent = "❌ Incorrect. Try again.";
           feedback.style.color = "red";
-        });
-    });
-  }
-});
+        }
+      })
+      .catch(err => {
+        console.error("Validation error:", err);
+        feedback.textContent = "Error. Please try again later.";
+        feedback.style.color = "red";
+      });
+  });
+}

@@ -67,13 +67,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Puzzle 4
-  const form4 = document.getElementById("browserForm");
-  if (form4) {
-    form4.addEventListener("submit", e => {
-      e.preventDefault();
-      validateAnswer("phase4", "browserInput", "browserFeedback", "phase5.html");
-    });
-  }
+const form4 = document.getElementById("browserForm");
+if (form4) {
+  console.log("✅ Phase 4 form detected");
+
+  form4.addEventListener("submit", e => {
+    e.preventDefault();
+    console.log("🚀 Phase 4 submit triggered");
+
+    validateAnswer("phase4", "browserInput", "browserFeedback", "phase5.html");
+  });
+}
+
 
 
 

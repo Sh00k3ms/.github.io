@@ -91,15 +91,15 @@ if (form4) {
       const input = document.getElementById("puzzle5-answer");
       const userAnswer = input?.value?.trim().toLowerCase();
 
-      fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          type: "validate",
-          puzzle: "phase5",
-          answer: userAnswer
-        })
-      })
+fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
+  method: "POST",
+  headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  body: new URLSearchParams({
+    puzzle: "phase5",
+    answer: userAnswer
+  })
+})
+
         .then(res => res.json())
         .then(data => {
           if (data.status === "correct") {

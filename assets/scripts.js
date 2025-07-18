@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         puzzle: puzzleName,
         answer: userAnswer
     })
-  })
   
       .then(res => res.json())
       .then(data => {
@@ -79,7 +78,7 @@ if (form4) {
   });
 }
 
-// Puzzle 5 (Grifter)
+// Puzzle 5 (Grifter) uses custom logic for final step & no redirect
 const form5 = document.getElementById("puzzle5-form");
 if (form5) {
   form5.addEventListener("submit", e => {

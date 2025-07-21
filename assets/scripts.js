@@ -4,39 +4,45 @@ document.addEventListener("DOMContentLoaded", () => {
     const feedback = document.getElementById(feedbackId);
     const userAnswer = input?.value?.trim().toLowerCase();
 
-    if (!userAnswer) {
-      feedback.textContent = "Please enter an answer.";
-      feedback.style.color = "orange";
-      return;
-    }
+function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
+  const input = document.getElementById(inputId);
+  const feedback = document.getElementById(feedbackId);
+  const userAnswer = input?.value?.trim().toLowerCase();
 
-    fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        puzzle: puzzleName,
-        answer: userAnswer
+  if (!userAnswer) {
+    feedback.textContent = "Please enter an answer.";
+    feedback.style.color = "orange";
+    return;
+  }
+
+  fetch("https://under-the-hood-ctf.sh00k3ms.workers.dev", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      puzzle: puzzleName,
+      answer: userAnswer
     })
   })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "correct") {
-          feedback.textContent = "✅ Correct! Redirecting...";
-          feedback.style.color = "lightgreen";
-          if (nextUrl) {
-            setTimeout(() => window.location.href = nextUrl, 1500);
-          }
-        } else {
-          feedback.textContent = "❌ Incorrect. Try again.";
-          feedback.style.color = "red";
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === "correct") {
+        feedback.textContent = "✅ Correct! Redirecting...";
+        feedback.style.color = "lightgreen";
+        if (nextUrl) {
+          setTimeout(() => window.location.href = nextUrl, 1500);
         }
-      })
-      .catch(err => {
-        console.error("Validation error:", err);
-        feedback.textContent = "Error. Please try again later.";
+      } else {
+        feedback.textContent = "❌ Incorrect. Try again.";
         feedback.style.color = "red";
-      });
-  }
+      }
+    })
+    .catch(err => {
+      console.error("Validation error:", err);
+      feedback.textContent = "Error. Please try again later.";
+      feedback.style.color = "red";
+    });
+}
+
   // Puzzle 1
   const form1 = document.getElementById("puzzle1-form");
   if (form1) {

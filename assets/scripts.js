@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         feedback.textContent = "Error. Please try again later.";
         feedback.style.color = "red";
       });
-
+  }
   // Puzzle 1
   const form1 = document.getElementById("puzzle1-form");
   if (form1) {

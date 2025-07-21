@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
     const input = document.getElementById(inputId);

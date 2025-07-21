@@ -1,10 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
-    const input = document.getElementById(inputId);
-    const feedback = document.getElementById(feedbackId);
-    const userAnswer = input?.value?.trim().toLowerCase();
-
-function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
+ function validateAnswer(puzzleName, inputId, feedbackId, nextUrl) {
   const input = document.getElementById(inputId);
   const feedback = document.getElementById(feedbackId);
   const userAnswer = input?.value?.trim().toLowerCase();

@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         puzzle: puzzleName,
         answer: userAnswer
     })
-  
+  })
       .then(res => res.json())
       .then(data => {
         if (data.status === "correct") {

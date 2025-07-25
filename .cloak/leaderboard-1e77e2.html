@@ -2,31 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>🔒 Elite Access</title>
+  <title>🕶️ Elite Solvers</title>
   <link rel="stylesheet" href="../assets/style.css" />
   <style>
     body {
+      font-family: monospace;
       text-align: center;
-      margin-top: 5vh;
+      margin-top: 10vh;
+      background-color: #0a0a0a;
+      color: #f0f0f0;
     }
+
     input[type="password"] {
       padding: 8px;
       font-size: 1rem;
       margin-right: 8px;
+      background: #111;
+      border: 1px solid #555;
+      color: #0f0;
     }
+
     button {
       padding: 8px 16px;
       font-size: 1rem;
       cursor: pointer;
+      background: #111;
+      border: 1px solid #0f0;
+      color: #0f0;
     }
+
     ul#results {
-      margin-top: 2em;
       list-style: none;
       padding: 0;
+      margin-top: 2em;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
     }
+
+    ul#results.visible {
+      opacity: 1;
+    }
+
     ul#results li {
-      margin: 0.5em 0;
-      font-family: monospace;
+      margin: 0.4em 0;
+      font-size: 1.1rem;
+      animation: flicker 0.3s ease-in-out;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0.3; }
+      50% { opacity: 1; }
+      100% { opacity: 0.9; }
     }
   </style>
 </head>
@@ -35,6 +61,7 @@
     <h1>🕶️ Hack the Stack – Elite Solvers</h1>
     <p>This space is reserved for those who cracked the code.</p>
     <p>Enter the passphrase to reveal the leaderboard:</p>
+
     <input type="password" id="pass" placeholder="••••••••" />
     <button onclick="reveal()">Enter</button>
 
@@ -44,27 +71,37 @@
   <script>
     async function reveal() {
       const pass = document.getElementById("pass").value.trim();
-      const res = await fetch("https://under-the-hood.sh00k3ms.workers.dev/leaderboard", {
+      const list = document.getElementById("results");
+      list.innerHTML = "";
+
+      const res = await fetch("https://script.google.com/macros/s/AKfycbwZq2jIdeZzOJrBr1aq4pDrx0M4AN9VfJhWd84iz_Qjc0pURh14RDA5UAC7eMAApEQsZw/exec", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pass })
       });
 
-      const list = document.getElementById("results");
-      list.innerHTML = "";
-
       if (!res.ok) {
         list.innerHTML = "<li>🚫 Incorrect passphrase.</li>";
+        list.classList.add("visible");
         return;
       }
 
       const data = await res.json();
+      if (!Array.isArray(data)) {
+        list.innerHTML = "<li>❌ Access denied or data error.</li>";
+        list.classList.add("visible");
+        return;
+      }
+
       data.forEach(entry => {
-        const item = document.createElement("li");
-        const name = entry.handle.replace(/(?<=.{2}).(?=.*@|$)/g, "*"); // obfuscate handle
-        item.textContent = `${name} – ${entry.timestamp}`;
-        list.appendChild(item);
+        const li = document.createElement("li");
+        const masked = entry.handle.replace(/(?<=^.{2}).(?=.*$)/g, "*");
+        li.textContent = `${masked} – ${entry.timestamp}`;
+        list.appendChild(li);
       });
+
+      list.classList.add("visible");
+      console.log("🎯 Leaderboard unlocked.");
     }
   </script>
 </body>

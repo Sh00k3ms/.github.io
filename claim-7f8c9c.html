@@ -8,8 +8,10 @@
 <body>
   <main>
     <h1>🎉 You Found Grifter!</h1>
-    <p>You hacked the stack, found Grifter, and scanned the QR. Only a few elite solvers make it here. Respect the pack.</p>
-    <p>Enter your handle below to log your win and claim your sticker:</p>
+    <p id="intro-text">
+      You hacked the stack, found Grifter, and scanned the QR. Only a few elite solvers make it here. Respect the pack.
+    </p>
+    <p>Enter your handle below to log your win for a social media shout out and claim your sticker:</p>
 
     <form id="claim-form">
       <label for="solver-name">Your Handle:</label>
@@ -31,6 +33,12 @@
     document.addEventListener("DOMContentLoaded", () => {
       const claimForm = document.getElementById("claim-form");
       const claimFeedback = document.getElementById("claim-feedback");
+      const introText = document.getElementById("intro-text");
+
+      const isWinner = new URLSearchParams(window.location.search).get("winner") === "true";
+      if (isWinner) {
+        introText.innerHTML = "🔥 <strong>You’re the elite solver!</strong> First to find Grifter and claim the reward. Respect the pack.";
+      }
 
       claimForm.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -44,12 +52,14 @@
           return;
         }
 
+        const payload = { handle: isWinner ? `[WINNER] ${handle}` : handle };
+
         try {
           await fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
             method: "POST",
             mode: "no-cors",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ handle })
+            body: JSON.stringify(payload)
           });
 
           claimFeedback.textContent = `✅ Thanks, ${handle}. Respect the pack.`;

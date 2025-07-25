@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Claim Your Prize</title>
+  <title>You Found Grifter!</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <main>
-    <h1>Contest Goon</h1>
-    <p>
-      You did it. You hacked the stack, you found Grifter, and you scanned the QR. Only a few elite solvers make it here.
-    </p>
+    <h1>🎉 You Found Grifter!</h1>
+    <p>You hacked the stack, found Grifter, and scanned the QR. Only a few elite solvers make it here. Respect the pack.</p>
+    <p>Enter your handle below to log your win and claim your sticker:</p>
 
     <form id="claim-form">
       <label for="solver-name">Your Handle:</label>
@@ -18,9 +17,11 @@
       <button type="submit">Submit</button>
     </form>
 
-    <p id="claim-feedback"></p>
+    <p id="claim-feedback" style="margin-top: 1em;"></p>
+
     <p class="small">
-      *Only the first solver will receive the limited edition holographic sticker and temporary tattoo. All other hackers that solve hack the stack will receive a custom sticker. Submissions will be logged.
+      *Only the first solver will receive the limited edition holographic sticker and temporary tattoo.
+      All other hackers who solve Hack the Stack will receive a custom sticker. Submissions are logged.
     </p>
 
     <img src="assets/holographic-sticker-preview.png" alt="Holographic Grifter Reward" class="puzzle-image" />
@@ -33,9 +34,15 @@
 
       claimForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const handle = document.getElementById("solver-name").value.trim();
 
-        if (!handle) return;
+        const input = document.getElementById("solver-name");
+        const handle = input?.value?.trim();
+
+        if (!handle || handle.length < 2 || handle.length > 30) {
+          claimFeedback.textContent = "⚠️ Please enter a valid handle.";
+          claimFeedback.style.color = "orange";
+          return;
+        }
 
         try {
           await fetch("https://script.google.com/macros/s/AKfycbz7HPEu-1kUlJ4MncZWxilV2_qUjapEnQmNZb1Oprn3eqAaCF1lR86D6y5Ptn9C2gL8RQ/exec", {
@@ -45,11 +52,12 @@
             body: JSON.stringify({ handle })
           });
 
-          claimFeedback.textContent = `Thanks, ${handle}. Respect the pack.`;
-          claimFeedback.style.color = "green";
-          claimForm.reset();
+          claimFeedback.textContent = `✅ Thanks, ${handle}. Respect the pack.`;
+          claimFeedback.style.color = "lightgreen";
+          input.disabled = true;
+          claimForm.querySelector("button").disabled = true;
         } catch (err) {
-          claimFeedback.textContent = "Error submitting. Please try again later.";
+          claimFeedback.textContent = "❌ Error submitting. Please try again later.";
           claimFeedback.style.color = "red";
         }
       });

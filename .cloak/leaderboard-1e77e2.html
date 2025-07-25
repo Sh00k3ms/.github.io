@@ -1,17 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Access Denied</title>
-  <link rel="stylesheet" href="../assets/style.css">
+  <meta charset="UTF-8" />
+  <title>🔒 Elite Access</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+  <style>
+    body {
+      text-align: center;
+      margin-top: 5vh;
+    }
+    input[type="password"] {
+      padding: 8px;
+      font-size: 1rem;
+      margin-right: 8px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    ul#results {
+      margin-top: 2em;
+      list-style: none;
+      padding: 0;
+    }
+    ul#results li {
+      margin: 0.5em 0;
+      font-family: monospace;
+    }
+  </style>
 </head>
 <body>
   <main>
-    <h1>🔒 Access Restricted</h1>
-    <p>Enter the passphrase to access the leaderboard:</p>
-    <input type="password" id="pass" placeholder="••••••••">
+    <h1>🕶️ Hack the Stack – Elite Solvers</h1>
+    <p>This space is reserved for those who cracked the code.</p>
+    <p>Enter the passphrase to reveal the leaderboard:</p>
+    <input type="password" id="pass" placeholder="••••••••" />
     <button onclick="reveal()">Enter</button>
-    <ul id="results" style="margin-top: 2em;"></ul>
+
+    <ul id="results"></ul>
   </main>
 
   <script>
@@ -34,7 +61,7 @@
       const data = await res.json();
       data.forEach(entry => {
         const item = document.createElement("li");
-        const name = entry.handle.replace(/(?<=.{2}).(?=.*@|$)/g, "*");
+        const name = entry.handle.replace(/(?<=.{2}).(?=.*@|$)/g, "*"); // obfuscate handle
         item.textContent = `${name} – ${entry.timestamp}`;
         list.appendChild(item);
       });

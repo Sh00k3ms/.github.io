@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Access Denied</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <main>
+    <h1>🔒 Access Restricted</h1>
+    <p>Enter the passphrase to access the leaderboard:</p>
+    <input type="password" id="pass" placeholder="••••••••">
+    <button onclick="reveal()">Enter</button>
+    <ul id="results" style="margin-top: 2em;"></ul>
+  </main>
+
+  <script>
+    async function reveal() {
+      const pass = document.getElementById("pass").value.trim();
+      const res = await fetch("https://under-the-hood.sh00k3ms.workers.dev/leaderboard", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pass })
+      });
+
+      const list = document.getElementById("results");
+      list.innerHTML = "";
+
+      if (!res.ok) {
+        list.innerHTML = "<li>🚫 Incorrect passphrase.</li>";
+        return;
+      }
+
+      const data = await res.json();
+      data.forEach(entry => {
+        const item = document.createElement("li");
+        const name = entry.handle.replace(/(?<=.{2}).(?=.*@|$)/g, "*");
+        item.textContent = `${name} – ${entry.timestamp}`;
+        list.appendChild(item);
+      });
+    }
+  </script>
+</body>
+</html>
